@@ -1,0 +1,53 @@
+ static string GenerateNextCreditCardNumber(string numbers)
+        {
+            numbers = numbers.Replace(" ", string.Empty);
+            string newNumber = null;
+            Random rand = new Random();
+            int[] arrNum = new int[numbers.Length];
+            int[] newArrNum = new int[numbers.Length];
+            int[] newArrNumForValid = new int[numbers.Length];
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                arrNum[i] = Convert.ToInt32(numbers[i]) - 48;
+            }
+            link1:
+            for(int i = 0; i < arrNum.Length; i++)
+            {
+                if (i<6)
+                    newArrNum[i] = arrNum[i];
+                else
+                {
+                    newArrNum[i] = rand.Next(0, 10);
+                }
+                newArrNumForValid[i] = newArrNum[i];
+            }
+            //--------IsCreditCardNumberValid-----------------------------------------
+            int sum = 0;
+            int k = 0;
+            for (int i = newArrNumForValid.Length - 1; i >= 0; i--)
+            {
+                k++;
+                if (k % 2 == 0)
+                {
+                    newArrNumForValid[i] = newArrNumForValid[i] * 2;
+                    if (newArrNumForValid[i] > 9)
+                    {
+                        newArrNumForValid[i] = newArrNumForValid[i] / 10 + newArrNumForValid[i] % 10;
+                    }
+                }
+                sum = sum + newArrNumForValid[i];
+            }
+            if (sum%10 == 0 && sum > 0)
+            {
+                for (int i = 0; i < newArrNum.Length; i++)
+                {
+                    newNumber += newArrNum[i];
+                }
+                return newNumber;
+            }
+            //------------------------------------------------------------------------
+            else
+            {
+                goto link1;
+            }
+        }
