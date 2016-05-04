@@ -1,0 +1,13 @@
+ static void Main(string[] args)
+        {
+            Console.WriteLine("Please, enter your bank card number:");
+            string number=Convert.ToString(Console.ReadLine());
+            string temp=GetCreditCardVendor(number);
+            Console.WriteLine("Number: "+number);
+            Console.WriteLine("Vender: "+temp);
+            bool isValid = IsCreditCardNumberValid(number);
+            Console.WriteLine("Credit card number is valid: "+isValid);
+            string newNumber = GenerateNextCreditCardNumber(number);
+            Console.WriteLine("New credit Card Number:" + newNumber);
+            Console.ReadLine();
+        }
