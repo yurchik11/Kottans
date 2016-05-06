@@ -21,7 +21,7 @@ static bool IsCreditCardNumberValid(string numbers)
                 }
                 sum = sum + arrNum[i];
             }
-            if (sum%10 == 0 && sum>0)
+            if ((sum%10 == 0 && sum>0)&&(GetCreditCardVendor(numbers)!="Unknown"))
                 return true;
             else
                 return false;
