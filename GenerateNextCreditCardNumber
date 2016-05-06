@@ -1,24 +1,25 @@
- static string GenerateNextCreditCardNumber(string numbers)
+static string GenerateNextCreditCardNumber(string numbers)
         {
             numbers = numbers.Replace(" ", string.Empty);
             string newNumber = null;
-            Random rand = new Random();
-            int[] arrNum = new int[numbers.Length];
             int[] newArrNum = new int[numbers.Length];
             int[] newArrNumForValid = new int[numbers.Length];
             for (int i = 0; i < numbers.Length; i++)
             {
-                arrNum[i] = Convert.ToInt32(numbers[i]) - 48;
+                newArrNum[i] = Convert.ToInt32(numbers[i]) - 48;
             }
             link1:
-            for(int i = 0; i < arrNum.Length; i++)
+            if (newArrNum[numbers.Length - 1] == 9)
             {
-                if (i<6)
-                    newArrNum[i] = arrNum[i];
-                else
-                {
-                    newArrNum[i] = rand.Next(0, 10);
-                }
+                newArrNum[numbers.Length - 1] = 0;
+                newArrNum[numbers.Length - 2] = newArrNum[numbers.Length - 2] + 1;
+            }
+            else
+            {
+                newArrNum[numbers.Length - 1] = newArrNum[numbers.Length - 1] + 1;
+            }
+            for (int i = 0; i < numbers.Length; i++)
+            {
                 newArrNumForValid[i] = newArrNum[i];
             }
             //--------IsCreditCardNumberValid-----------------------------------------
@@ -37,7 +38,7 @@
                 }
                 sum = sum + newArrNumForValid[i];
             }
-            if (sum%10 == 0 && sum > 0)
+            if ((sum%10 == 0 && sum > 0)&& (GetCreditCardVendor(numbers) != "Unknown"))
             {
                 for (int i = 0; i < newArrNum.Length; i++)
                 {
