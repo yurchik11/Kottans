@@ -10,19 +10,19 @@ static string GetCreditCardVendor(string numbers)
                 vendorName = "MasterCard";
             }
             else if (((num2 >= 56 && num2 <= 69 && numbers.Length >= 12 && numbers.Length <= 19)) 
-                || (num2 == 50 && numbers.Length >= 12 && numbers.Length <= 19))
+                || (num2 == 50 && numbers.Length >= 12 && numbers.Length <= 19)&&IsCreditCardNumberValid(numbers))
             {
                 vendorName = "Maestro";
             }
-            else if ((num2 == 34 && numbers.Length == 15) || (num2 == 37 && numbers.Length == 15))
+            else if ((num2 == 34 && numbers.Length == 15) || (num2 == 37 && numbers.Length == 15) && IsCreditCardNumberValid(numbers))
             {
                 vendorName = "American Express";
             }
-            else if((num1 == 4)&&(numbers.Length==13 || numbers.Length == 16 || numbers.Length == 19))
+            else if((num1 == 4)&&(numbers.Length==13 || numbers.Length == 16 || numbers.Length == 19) && IsCreditCardNumberValid(numbers))
             {
                 vendorName = "Visa";
             }
-            else if (num4 >= 3528 && num4 <= 3589 && numbers.Length == 16)
+            else if ((num4 >= 3528 && num4 <= 3589 && numbers.Length == 16)&& IsCreditCardNumberValid(numbers))
             {
                 vendorName = "JCB";
             }
