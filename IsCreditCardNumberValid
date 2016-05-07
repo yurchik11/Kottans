@@ -1,4 +1,4 @@
-static bool IsCreditCardNumberValid(string numbers)
+ static bool IsCreditCardNumberValid(string numbers)
         {
             numbers = numbers.Replace(" ", string.Empty);
             int[] arrNum = new int[numbers.Length];
@@ -22,6 +22,7 @@ static bool IsCreditCardNumberValid(string numbers)
                 sum = sum + arrNum[i];
             }
             if ((sum%10 == 0 && sum>0)&&(GetCreditCardVendor(numbers)!="Unknown"))
+            //if (sum%10 == 0 && sum>0)
                 return true;
             else
                 return false;
