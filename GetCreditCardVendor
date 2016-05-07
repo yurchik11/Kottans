@@ -1,28 +1,30 @@
 static string GetCreditCardVendor(string numbers)
         {
-           string vendorName="";
+           string vendorName=null;
            numbers = numbers.Replace(" ",string.Empty);
            int num1 = Convert.ToInt32(numbers[0]) - 48;
            int num2 = (Convert.ToInt32(numbers[0]) - 48)*10 + Convert.ToInt32(numbers[1]) - 48;
            int num4 = num2*100+(Convert.ToInt32(numbers[2]) - 48) * 10 + Convert.ToInt32(numbers[3]) - 48;
-           if ((num2 >= 51 && num2 <= 55 && numbers.Length==16)||(num4>=2221 && num4<= 2720 && numbers.Length == 16))
+           if ((num2 >= 51 && num2 <= 55 && numbers.Length==16)||(num4>=2221 && num4<= 2720 && numbers.Length == 16)
+                && IsCreditCardNumberValidForVendor(numbers))
+
             {
                 vendorName = "MasterCard";
             }
             else if (((num2 >= 56 && num2 <= 69 && numbers.Length >= 12 && numbers.Length <= 19)) 
-                || (num2 == 50 && numbers.Length >= 12 && numbers.Length <= 19)&&IsCreditCardNumberValid(numbers))
+                || (num2 == 50 && numbers.Length >= 12 && numbers.Length <= 19) && IsCreditCardNumberValidForVendor(numbers))
             {
                 vendorName = "Maestro";
             }
-            else if ((num2 == 34 && numbers.Length == 15) || (num2 == 37 && numbers.Length == 15) && IsCreditCardNumberValid(numbers))
+            else if ((num2 == 34 && numbers.Length == 15) || (num2 == 37 && numbers.Length == 15) && IsCreditCardNumberValidForVendor(numbers))
             {
                 vendorName = "American Express";
             }
-            else if((num1 == 4)&&(numbers.Length==13 || numbers.Length == 16 || numbers.Length == 19) && IsCreditCardNumberValid(numbers))
+            else if((num1 == 4)&&(numbers.Length==13 || numbers.Length == 16 || numbers.Length == 19) && IsCreditCardNumberValidForVendor(numbers))
             {
                 vendorName = "Visa";
             }
-            else if ((num4 >= 3528 && num4 <= 3589 && numbers.Length == 16)&& IsCreditCardNumberValid(numbers))
+            else if ((num4 >= 3528 && num4 <= 3589 && numbers.Length == 16) && IsCreditCardNumberValidForVendor(numbers))
             {
                 vendorName = "JCB";
             }
