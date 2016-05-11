@@ -1,4 +1,4 @@
-static string GenerateNextCreditCardNumber(string numbers)
+   static string GenerateNextCreditCardNumber(string numbers)
         {
             numbers = numbers.Replace(" ", string.Empty);
             string newNumber = null;
@@ -8,16 +8,29 @@ static string GenerateNextCreditCardNumber(string numbers)
             {
                 newArrNum[i] = Convert.ToInt32(numbers[i]) - 48;
             }
+            int label = numbers.Length - 1;
+            int index = numbers.Length - 1;
             link1:
-            if (newArrNum[numbers.Length - 1] == 9)
+            if (newArrNum[label] == 9)
             {
-                newArrNum[numbers.Length - 1] = 0;
-                newArrNum[numbers.Length - 2] = newArrNum[numbers.Length - 2] + 1;
+                newArrNum[label] = 0;
+                label--;
+                if (newArrNum[label] == 9)
+                {
+                    goto link1;
+                }
+                else
+                {
+                    newArrNum[label]++;
+                }
+                goto link2;
             }
             else
-            {
-                newArrNum[numbers.Length - 1] = newArrNum[numbers.Length - 1] + 1;
+            {    
+                newArrNum[index]++;
+             //   label--;
             }
+            link2:
             for (int i = 0; i < numbers.Length; i++)
             {
                 newArrNumForValid[i] = newArrNum[i];
